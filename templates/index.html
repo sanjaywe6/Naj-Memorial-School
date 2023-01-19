@@ -1,0 +1,291 @@
+{% extends 'basic.html' %}
+
+{% block title %}
+Naaz Memorial
+{% endblock %}
+{% block active1 %}
+activePage
+{% endblock %}
+{% block logo %}
+media/najmemorial/logo/logo.jpeg
+{% endblock %}
+{% block css %}
+<style>
+  .moreInfo:hover {
+    background-color: blue;
+    color: white;
+    box-shadow: 0px 0px 10px black;
+  }
+
+  .viewAll:hover {
+    background-color: blue;
+    color: black;
+    box-shadow: 0px 0px 15px rgb(49, 48, 48);
+  }
+
+  .postQuerry:hover {
+    background-color: blue;
+    color: white;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+  }
+</style>
+{% endblock %}
+{% block body %}
+<div id="warning"></div>
+<div class="container-fluid">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 0"></button>
+      {% for item in bannerImg|slice:'1:' %}
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{forloop.counter}}"
+        aria-label="Slide {{forloop.counter}}"></button>
+      {% endfor %}
+    </div>
+    <div class="carousel-inner" style="box-shadow: 0px 0px 20px rgb(2, 2, 2)">
+      <div class="carousel-item active">
+        <div style="display: flex; justify-content: center; max-height: 650px">
+          <img src="media/{{bannerImg.0.img}}" class="d-block w-100 h--1" alt="..." />
+        </div>
+      </div>
+      {% for item in bannerImg|slice:'1:' %}
+      <div class="carousel-item">
+        <div style="display: flex; justify-content: center; max-height: 650px">
+          <img src="media/{{item.img}}" class="d-block w-100 h--1" alt="..." />
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" style="
+          background-color: blue;
+          border: 2px solid black;
+          border-radius: 10px;
+        " aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true" style="
+          background-color: blue;
+          border: 2px solid black;
+          border-radius: 10px;
+        "></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<div class="container">
+  <div class="card" style="border-color: white; margin: 20px">
+    <div class="card">
+      <h4 class="card-header">About School</h4>
+      <div class="card-body">
+        <h5 class="card-title">
+          Naaz Memorial Girls Higher Secondory School Kanoongopura South
+          established in 2006 in the late memory of the sister former member of
+          lok sabha Mrs. Rubab Sayeeda.
+        </h5>
+        <ul>
+          <li>
+            <p class="card-text">
+              School has running classes fron Nursery to High school.
+              Co-education till 5<sup>th</sup> standard and later on only girls.
+            </p>
+          </li>
+          <li>
+            <p class="card-text">
+              24 X 7 electricity and running water available,
+            </p>
+          </li>
+          <li>
+            <p class="card-text">
+              All teachers are highly qualified. Most of the teachers are B.ed.
+              qualified and all are highly experienced.
+            </p>
+          </li>
+          <li>
+            <p class="card-text">
+              Our school is equiped with large , ventilated classrooms , very
+              big playground , clean drinking water and seperate staff rooms for
+              teachers.
+            </p>
+          </li>
+          <li>
+            <p class="card-text">For small children we have fun rides also.</p>
+          </li>
+        </ul>
+        <p class="card-text">
+          For emergency stuations proper security is awailable. Fire
+          extinguishers awailable.
+        </p>
+      </div>
+    </div>
+    <a href="/about/" class="btn btn-info moreInfo my-2">Fore more information..</a>
+  </div>
+
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div>
+        <h3>Gallery Images</h3>
+        <a href="/gallary/"><button class="btn btn-success viewAll my-2"
+            style="float: right; position: relative; bottom: 42px">
+            View All
+          </button></a>
+      </div>
+      <div class="carousel-item active">
+        {% for val in gallaryImg|slice:':3' %}
+        <div class="card" style="width: 25rem; display: inline-block; margin: 10px">
+          <img src="media/{{val.img}}" class="card-img-top" alt="..." />
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5" style="
+    background-color: rgb(183, 179, 179);
+    padding: 5px;
+    box-shadow: 0px 0px 15px rgb(173, 170, 170);
+  ">
+  <div style="margin: 20px">
+
+    <div id="msg_comt">
+    </div>
+
+    <h2>Let's talk</h2>
+    <h4>For any enquiry post your question here</h4>
+
+    </form>
+
+    <form id="commentForm">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col">
+          <input type="text" id="name" class="form-control" placeholder="Name" aria-label="name" name="name" required />
+        </div>
+        <div class="col">
+          <input type="text" id="sub" class="form-control" placeholder="Subject of querry" aria-label="querry"
+            name="sub" required />
+        </div>
+      </div>
+      <div class="mb-3 my-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Describe your querry or issue here</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 210px" name="desc"
+          itemid="desc" required></textarea>
+<!-- 
+        <div style="background-color: black; padding:20px; display: flex;justify-content: center;">
+          <input type="hidden" value="{{random_bot_file.sno}}" name="captcha_id" id="captcha_id">
+          <div
+            style="background-image: url('media/najmemorial/captcha/captcha_bac.jpeg'); width: 60px;height: 30px; background-size: 250px;"
+            class="mx-2">
+            <img src="media/{{random_bot_file.img}}" alt="Loading Captcha.." style="width: 100%; opacity: 0.4;"
+              id="captcha_img">
+          </div>
+          <input type="number" style="border: 1px solid blue; border-radius:7px; padding-left: 10px;" class="mx-2"
+            name="captcha_sum" id="captcha_sum" required>
+        </div> -->
+
+
+
+      </div>
+      <button class="btn btn-info postQuerry" id="comBtn" type="submit">
+        Post querry
+      </button>
+    </form>
+  </div>
+  <div id="jsonComt">
+    {% for val in comment %}
+    <div class="card" style="border-color: white">
+      <div class="card-body">
+        <b>
+          <p class="card-title" style="color: blue">
+            <img src="/media/najmemorial/logo/userlogo.png" alt="" style="
+              width: 60px;
+              border: 1px solid black;
+              border-radius: 50px;
+              margin-right: 25px;
+            " />{{ val.comm_name }}
+          </p>
+        </b>
+        <p class="card-text" style="color: rgb(77, 77, 195)">{{val.comm_desc}}</p>
+        <p class="text-muted">Posted on {{val.comm_date}}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endblock %}
+  {% block js %}
+  <script>
+    $(document).ready(function () {
+      $('#commentForm').on('submit', function (e) {
+        e.preventDefault()
+        $.ajax({
+          type: 'POST',
+          url: '/',
+          data: {
+            name: $('#name').val(),
+            sub: $('#sub').val(),
+            desc: $('#exampleFormControlTextarea1').val(),
+            captcha_id: $('#captcha_id').val(),
+            captcha_sum: $('#captcha_sum').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+          },
+          success: function (data) {
+            response = data.data
+            allComt = data.allComt
+            msg = data.msg
+            file = data.random_bot_file
+            output = ""
+            for (let i = 0; i < allComt.length; i++) {
+              const element = allComt[i];
+              output += `  <div class="card" style="border-color: white">
+                        <div class="card-body">
+                          <b
+                            ><p class="card-title" style="color: blue">
+                              <img
+                                src="/media/najmemorial/logo/userlogo.png"
+                                alt=""
+                                style="
+                                  width: 60px;
+                                  border: 1px solid black;
+                                  border-radius: 50px;
+                                  margin-right: 25px;
+                                "
+                              />${element.comm_name}
+                            </p></b
+                          >
+                          <p class="card-text" style="color: rgb(77, 77, 195)">${element.comm_desc}</p>
+                          <p class="text-muted">Posted on ${element.comm_date}</p>
+                        </div>
+                      </div>`
+            }
+            //  updating all comments
+            $('#jsonComt').html(output)
+
+            // updating msg
+            $('#msg_comt').html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Massege!</strong> ${msg}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>`)
+
+            // updating captcha file
+            $('#captcha_img').attr('src', `media/${file.img}`)
+
+            //  Empting all inputs
+            $('#name').val("")
+            $('#sub').val("")
+            $('#exampleFormControlTextarea1').val("")
+            $('#captcha_sum').val("")
+            $('#captcha_id').val(file.sno)
+
+          }
+        })
+      })
+
+
+
+    })
+  </script>
+  {% endblock %}

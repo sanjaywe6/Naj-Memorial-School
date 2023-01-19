@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Changa:wght@500&family=Libre+Baskerville&family=M+PLUS+1+Code&family=Roboto+Slab&family=Secular+One&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Changa", sans-serif;
+        margin: 0px;
+        padding: 0px;
+      }
+      .botli {
+        margin: 20px;
+        list-style: none;
+        display: inline-block;
+      }
+      .botanch {
+        text-decoration: none;
+        color: black;
+      }
+      .navlink {
+        font-size: 20px;
+      }
+      .navlinkHover{
+        background-color: black;
+        border: 0px solid black;
+        border-radius: 8px;
+        box-shadow: 0px 0px 15px rgb(96, 95, 95);
+      }
+      .activePage{
+        background-color: rgb(21, 0, 255);
+        border: 1px solid black;
+        border-radius: 7px;
+      }
+    </style>
+    {% block css %} {% endblock %}
+  </head>
+  <body onload="fillLoad()">
+    <header style="position: fixed; z-index: 3; width: 100vw; overflow: hidden">
+      <div
+        id="fillLoad"
+        style="background-color: red; height: 2px; width: 0px"
+      ></div>
+
+
+      <nav class="navbar navbar-expand-lg bg-dark" style="height: auto">
+        <div class="container-fluid">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span
+              class="navbar-toggler-icon"
+              style="
+                background-color: blue;
+                border: 2px solid blue;
+                border-radius: 5px;
+              "
+            ></span>
+          </button>
+          <div
+            class="collapse navbar-collapse"
+            id="navbarNavAltMarkup"
+            
+          >
+            <div class="navbar-nav" style="width:50vw;display: flex; justify-content:space-around">
+              <a
+                class="nav-link {% block active1 %}{% endblock %} navlink my-2"
+                aria-current="page"
+                href="/"
+                style="color: white;display: flex;justify-content: center;"
+                >Home</a
+              >
+              <a
+                class="nav-link {% block active2 %}{% endblock %} navlink my-2"
+                aria-current="page"
+                href="/about/"
+                style="color: white;display: flex;justify-content: center;"
+                >About Us</a
+              >
+              <a
+                class="nav-link {% block active3 %}{% endblock %} navlink my-2"
+                aria-current="page"
+                href="/gallary/"
+                style="color: white;display: flex;justify-content: center;"
+                >Gallary</a
+              >
+              <a
+                class="nav-link {% block active4 %}{% endblock %} navlink my-2"
+                aria-current="page"
+                href="/contact/"
+                style="color: white;display: flex;justify-content: center;"
+                >Contact Us</a
+              >
+
+              <a href="/admin/"
+              style="margin-top: 13px;"
+                ><button
+                  class="btn btn-danger"
+                  aria-current="page">
+                  School Login
+                </button></a
+              >
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main style="background-color: white">
+      <div
+        class="logo container"
+        style="display: flex; justify-content: center; padding-top: 93px"
+      >
+        <div
+          class="card mb-3"
+          style="max-width: 630px; border-color: transparent"
+        >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="{% block logo %}{% endblock %}"
+                alt=""
+                style="
+                  width: 220px;
+                  border: 1px solid black;
+                  border-radius: 80px;
+                "
+                class="rounded-circle"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body" style="margin-top: 20px">
+                <h5
+                  class="card-title"
+                  style="
+                    font-size: 35px;
+                    color: blue;
+                    text-shadow: 0px 5px 5px rgb(167, 163, 163);
+                  "
+                >
+                  Naaz Memorial Girls Higher Secondary School
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% block body %}{% endblock %}
+    </main>
+    <footer style="margin-top: 10px">
+      <div
+        class="container-fluid"
+        style="background-color: rgba(144, 144, 167, 0.855)"
+      >
+        <div style="display: flex; justify-content: center; word-wrap: normal">
+          <div class="nav" style="display: inline-block">
+            <ul>
+              <li class="botli"><a href="/" class="botanch">Home</a></li>
+              <li class="botli">
+                <a href="/about/" class="botanch">About Us</a>
+              </li>
+              <li class="botli">
+                <a href="/gallary/" class="botanch">Gallary</a>
+              </li>
+              <li class="botli">
+                <a href="/contact/" class="botanch">Contact Us</a>
+              </li>
+              <li class="botli">
+                <a href="/admin/" class="botanch">School Login</a>
+              </li>
+            </ul>
+          </div>
+          <div class="contact" style="display: inline-block; margin: 30px">
+            <p>School time to contact is 8 AM to 12 PM</p>
+            <p>Contact No:- 9889026379</p>
+            <p>Email:- brhnaazschool@gmail.com</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="copyright"
+        style="display: flex; justify-content: center; background-color: black"
+      >
+        <p style="color: white">
+          Copyright &copy 2022 This site is designed, developed and hosted by The Gurkul
+          (<a
+            href="https://www.instagram.com/sanjay_h101/"
+            style="text-decoration: none"
+            >Sanjay Gupta </a
+          >) and content is provided by Naaz Memorial.
+        </p>
+      </div>
+    </footer>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    // js for loader
+    function fillLoad() {
+      let bodyFill = document.getElementById("fillLoad");
+      bodyFill.style.width = "100vw";
+      setTimeout(function () {
+        bodyFill.style.width = "0px";
+        bodyFill.style.height = "0px";
+      }, 1000);
+    }
+
+    // js for navigation button hover
+    $('.navlink').mouseenter(function(){
+      $(this).addClass('navlinkHover')
+    })
+    $('.navlink').mouseleave(function(){
+      $(this).removeClass('navlinkHover')
+    })
+
+
+      
+  </script>
+  {% block js %} {% endblock %}
+</html>

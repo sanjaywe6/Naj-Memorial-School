@@ -1,0 +1,89 @@
+{% extends 'basic.html' %}
+
+{% block title %}
+Gallary
+{% endblock %}
+{% block active3 %}
+activePage
+{% endblock %}
+{% block logo %}
+../media/najmemorial/logo/logo.jpeg
+{% endblock %}
+
+{% block css %}
+<style>
+  .galImg{
+    width: 20rem; display: 
+    inline-block; margin: 10px; 
+    box-shadow: 15px 10px 15px black;
+  }
+  .galImgShow{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    z-index: 4;
+
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid" id="imgSlide" style="z-index:10;">
+    <h1 style="background-color: rgb(240, 236, 236); box-shadow: 0px 0px 40px rgb(187, 187, 187);" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">School Gallary</h1>
+    {% for item in gallaryPhoto %}
+    <div class="card galImg" id="{{item.img_id}}">
+      <a href="../media/{{item.img}}" target="_blank">
+        <img src="../media/{{item.img}}" class="card-img-top img-thumbnail"  alt="...">
+      </a>
+        <div class="card-body">
+            <p class="card-text">Uploaded {{item.img_date}}</p>
+
+        </div>
+    </div>
+      {% endfor %}
+      <hr>
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0" style="background-image:url('../media/{{gallaryPhoto.0.img}}') ; width: 50px; height: 50px; background-size: cover; border: 2px solid blue; border-radius: 10px;"></button>
+          {% for val in gallaryPhoto|slice:'1:' %}
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{forloop.counter}}" aria-label="Slide {{forloop.counter}}" style="background-image:url('../media/{{val.img}}') ; width: 50px; height: 50px; background-size: cover; border: 2px solid blue; border-radius: 10px;"></button>
+          {% endfor %}
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div style="display: flex; justify-content:center; max-height: 750px;">
+            <img src="../media/{{gallaryPhoto.0.img}}" class="d-block w-100" alt="...">
+          </div></div>
+          {% for val in gallaryPhoto|slice:'1:' %}
+          <div class="carousel-item">
+            <div style="display: flex; justify-content:center; max-height: 750px;">
+            <img src="../media/{{val.img}}" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function(){
+  $('.galImg').mouseenter(function(){
+    $(this).css('opacity','0.5')
+  })
+  $('.galImg').mouseleave(function(){
+    $(this).css('opacity','1')
+  })
+})
+</script>
+{% endblock %}
